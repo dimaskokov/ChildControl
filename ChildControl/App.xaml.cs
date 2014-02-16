@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
+using ChildControl.Model;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using ChildControl.Resources;
@@ -17,6 +19,8 @@ namespace ChildControl
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
+
+        public List<PosState> StateList { get; private set; }
 
         /// <summary>
         /// Constructor for the Application object.
@@ -55,6 +59,8 @@ namespace ChildControl
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+            if (StateList == null)
+                StateList = new List<PosState>();
         }
 
         // Code to execute when the application is launching (eg, from Start)
