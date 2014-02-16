@@ -3,6 +3,7 @@ using ServerWebApi.Data.Entity;
 using System.Web.Http;
 using System.Linq;
 using System.Collections.Generic;
+using System;
 
 namespace ServerWebApi.Controllers
 {
@@ -15,6 +16,14 @@ namespace ServerWebApi.Controllers
         {
             return from child in _childRepo.GetAll()
                    select child;
+        }
+
+        [HttpGet]
+        public void ChangeStatus(string ChildId, string Status)
+        {
+            Child child = _childRepo.Get(Guid.Parse(ChildId));
+            child.Status = Status;
+            _childRepo.Add(child);
         }
     }
 }

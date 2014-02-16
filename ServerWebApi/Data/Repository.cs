@@ -13,6 +13,11 @@ namespace ServerWebApi.Data
         MemoryCache mc = MemoryCache.Default;
         public void Add(T entity)
         {
+            string key = entity.Id.ToString();
+            if (mc.Contains(key))
+            {
+                mc.Remove(key);
+            }
             mc.Add(entity.Id.ToString(), entity, cp);
         }
         public T Get(Guid Id)
